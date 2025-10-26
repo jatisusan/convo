@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import { sendWelcomeEmail } from "../emails/emailHandler.js";
 import { ENV } from "../lib/env.js";
 import { generateToken } from "../lib/utils.js";
@@ -48,4 +49,36 @@ export const signup = async (req, res) => {
     console.error("Signup Error:", error);
     res.status(500).json({ message: "Server error during signup." });
   }
+};
+
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
+
+    generateToken(user._id, res);
+    res.status(200).json({
+      message: "Login successful",
+      user: {
+        fullName: user.fullName,
+        email: user.email,
+        profilePic: user.profilePic,
+      },
+    });
+  } catch (error) {
+    console.error("Login Error:", error);
+    res.status(500).json({ message: "Server error during login." });
+  }
+};
+
+export const logout = (_, res) => {
+  res.clearCookie("jwt");
+  res.status(200).json({ message: "Logout successful" });
 };
