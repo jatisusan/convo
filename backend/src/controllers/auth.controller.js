@@ -1,3 +1,5 @@
+import { sendWelcomeEmail } from "../emails/emailHandler.js";
+import { ENV } from "../lib/env.js";
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js";
 
@@ -14,8 +16,10 @@ export const signup = async (req, res) => {
       return res.status(400).json({ message: "Invalid email format." });
     }
 
-    if(password.length < 6) {
-      return res.status(400).json({ message: "Password must be at least 6 characters long." });
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters long." });
     }
 
     const user = await User.findOne({ email });
@@ -24,9 +28,19 @@ export const signup = async (req, res) => {
     const newUser = new User({ fullName, email, password });
 
     if (newUser) {
-      await newUser.save();
-      generateToken(newUser._id, res);
-      return res.status(201).json({ message: "User registered successfully." });
+      const savedUser = await newUser.save();
+      generateToken(savedUser._id, res);
+      res.status(201).json({ message: "User registered successfully." });
+
+      try {
+        await sendWelcomeEmail(
+          savedUser.email,
+          savedUser.fullName,
+          ENV.CLIENT_URL
+        );
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       return res.status(500).json({ message: "Failed to register user." });
     }
