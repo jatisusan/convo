@@ -1,12 +1,20 @@
 import express from "express";
-import { login, logout, signup, updateProfile } from "../controllers/auth.controller.js";
+import {
+  login,
+  logout,
+  signup,
+  updateProfile,
+} from "../controllers/auth.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
+import { arcjetProtection } from "../middlewares/arcjet.middleware.js";
 
 const router = express.Router();
 
+router.use(arcjetProtection);
+
 router.post("/signup", signup);
 
-router.post("/login", login);
+router.post("/login", arcjetProtection, login);
 
 router.post("/logout", logout);
 
