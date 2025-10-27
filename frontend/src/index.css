@@ -1,3 +1,35 @@
-@import "tailwindcss";
-@plugin "daisyui";
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --color-primary: #4169E1;
+  --color-light-100: #e2e8f0;
+  --color-light-200: #cbd5e1;
+  --color-light-300: #94a3b8;
+}
+
+@layer utilities {
+  .input {
+    @apply w-full bg-slate-800/50 rounded-lg py-3 pl-10 pr-4 text-light-100 text-[15px] placeholder-light-300 focus:outline-none;
+  }
+
+  .auth-input-icon {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 text-light-300 size-5;
+  }
+
+  .auth-input-label {
+    @apply block text-sm font-medium text-light-200 mb-2;
+  }
+
+  .auth-btn {
+    @apply w-full bg-primary text-white rounded-lg py-2.5 font-medium hover:bg-primary/95 cursor-pointer my-3;
+  }
+}
+
+@layer base {
+  body {
+    @apply font-inter;
+  }
+}

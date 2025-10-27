@@ -1,10 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import ChatPage from "./pages/ChatPage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 import PageLoader from "./components/PageLoader";
+import AuthLayout from "./components/AuthLayout";
+import LoginForm from "./forms/LoginForm";
+import SignupForm from "./forms/SignupForm";
 
 function App() {
   const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
@@ -14,25 +15,24 @@ function App() {
   }, [checkAuth]);
 
   if (isCheckingAuth) return <PageLoader />;
-  
-  return (
-    <div className="relative min-h-screen flex justify-center items-center p-4 overflow-hidden">
-      <div className="absolute inset-0 bg-linear-to-br from-[#0a0a0a] via-[#141414] to-[#1e1b4b] -z-10" />
-      <div className="absolute w-[450px] h-[450px] bg-linear-to-br from-purple-800/15 via-fuchsia-700/10 to-rose-700/10 rounded-full blur-[140px] animate-[spin_35s_linear_infinite] -z-10" />
 
+  return (
+    <div className="relative h-screen flex justify-center items-center overflow-hidden  bg-linear-to-br from-[#0A0126] via-[#030018] to-[#0A0126]">
+      {/* Overlay pattern */}
+      <div className="absolute inset-0 bg-[repeating-radial-gradient(circle,rgba(255,255,255,0.05)_0,rgba(255,255,255,0.05)_1px,transparent_2px,transparent_8px)] pointer-events-none" />{" "}
+      
       <Routes>
         <Route
           path="/"
-          element={authUser ? <ChatPage /> : <Navigate to="/login" />}
+          element={authUser ? <ChatPage /> : <Navigate to="/auth/login" />}
         />
         <Route
-          path="/login"
-          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
-        />
-        <Route
-          path="/signup"
-          element={!authUser ? <SignupPage /> : <Navigate to="/" />}
-        />
+          path="/auth/"
+          element={!authUser ? <AuthLayout /> : <Navigate to="/" />}
+        >
+          <Route path="login" element={<LoginForm />} />
+          <Route path="signup" element={<SignupForm />} />
+        </Route>
       </Routes>
     </div>
   );
