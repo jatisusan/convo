@@ -1,13 +1,16 @@
-import { LockIcon, MailIcon } from "lucide-react";
+import { LoaderIcon, LockIcon, MailIcon } from "lucide-react";
 import { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login, isLoggingIn } = useAuthStore();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
+    login({ email, password });
   };
   return (
     <>
@@ -54,8 +57,12 @@ const LoginForm = () => {
         </div>
 
         {/* SUBMIT BUTTON */}
-        <button className="auth-btn" type="submit">
-          Login
+         <button className="auth-btn" type="submit" disabled={isLoggingIn}>
+          {isLoggingIn ? (
+            <LoaderIcon className="w-full h-5 animate-spin text-center" />
+          ) : (
+            "Login"
+          )}
         </button>
       </form>
 
