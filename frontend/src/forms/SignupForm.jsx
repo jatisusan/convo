@@ -18,10 +18,10 @@ const SignupForm = () => {
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div>
           <h2 className="text-xl font-semibold text-light-100">
-            Create an account
+            Create a new account
           </h2>
           <p className="text-sm text-slate-400">
-            Create a new account to get started.
+           To use Convo, please enter your details.
           </p>
         </div>
         <div>
