@@ -1,5 +1,6 @@
-import { LockIcon, MailIcon, UserIcon } from "lucide-react";
+import { LoaderIcon, LockIcon, MailIcon, UserIcon } from "lucide-react";
 import { useState } from "react";
+import { useAuthStore } from "../store/useAuthStore";
 
 const SignupForm = () => {
   const [formValues, setFormValues] = useState({
@@ -8,9 +9,11 @@ const SignupForm = () => {
     password: "",
   });
 
+  const { signup, isSigningUp } = useAuthStore();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    signup(formValues);
   };
 
   return (
@@ -21,7 +24,7 @@ const SignupForm = () => {
             Create a new account
           </h2>
           <p className="text-sm text-slate-400">
-           To use Convo, please enter your details.
+            To use Convo, please enter your details.
           </p>
         </div>
         <div>
@@ -78,8 +81,12 @@ const SignupForm = () => {
         </div>
 
         {/* SUBMIT BUTTON */}
-        <button className="auth-btn" type="submit">
-          Create Account
+        <button className="auth-btn" type="submit" disabled={isSigningUp}>
+          {isSigningUp ? (
+            <LoaderIcon className="w-full h-5 animate-spin text-center" />
+          ) : (
+            "Create Account"
+          )}
         </button>
       </form>
 

@@ -32,7 +32,14 @@ export const signup = async (req, res) => {
     if (newUser) {
       const savedUser = await newUser.save();
       generateToken(savedUser._id, res);
-      res.status(201).json({ message: "User registered successfully." });
+      res.status(201).json({
+        message: "User registered successfully.",
+        data: {
+          fullName: savedUser.fullName,
+          email: savedUser.email,
+          profilePic: savedUser.profilePic,
+        },
+      });
 
       try {
         await sendWelcomeEmail(
