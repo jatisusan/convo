@@ -34,7 +34,7 @@ export const signup = async (req, res) => {
       generateToken(savedUser._id, res);
       res.status(201).json({
         message: "User registered successfully.",
-        data: {
+        user: {
           fullName: savedUser.fullName,
           email: savedUser.email,
           profilePic: savedUser.profilePic,
@@ -74,7 +74,7 @@ export const login = async (req, res) => {
     generateToken(user._id, res);
     res.status(200).json({
       message: "Login successful",
-      data: {
+      user: {
         fullName: user.fullName,
         email: user.email,
         profilePic: user.profilePic,
@@ -109,7 +109,7 @@ export const updateProfile = async (req, res) => {
 
     res.status(200).json({
       message: "Profile picture updated successfully.",
-      data: {
+      user: {
         fullName: updatedUser.fullName,
         email: updatedUser.email,
         profilePic: updatedUser.profilePic,
