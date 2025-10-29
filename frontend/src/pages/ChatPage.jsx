@@ -1,10 +1,10 @@
 import ChatList from "../components/ChatList";
-import ChatMessages from "../components/ChatMessages";
 import ContactList from "../components/ContactList";
 import NoChatSelected from "../components/NoChatSelected";
 import ProfileHeader from "../components/ProfileHeader";
 import TabSwitch from "../components/TabSwitch";
 import { useChatStore } from "../store/useChatStore";
+import ChatContainer from "../components/ChatContainer";
 
 const ChatPage = () => {
   const { activeTab, selectedUser } = useChatStore();
@@ -24,7 +24,7 @@ const ChatPage = () => {
 
         {/* Right side — Chat messages */}
         <div className="flex-1 flex-col bg-[#100D22] rounded-xl backdrop-blur-xl">
-          {selectedUser ? <ChatMessages /> : <NoChatSelected />}
+          {selectedUser ? <ChatContainer /> : <NoChatSelected />}
         </div>
       </div>
     </div>
