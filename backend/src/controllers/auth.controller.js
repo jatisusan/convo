@@ -109,7 +109,7 @@ export const updateProfile = async (req, res) => {
 
     res.status(200).json({
       message: "Profile picture updated successfully.",
-      user: {
+      data: {
         fullName: updatedUser.fullName,
         email: updatedUser.email,
         profilePic: updatedUser.profilePic,
