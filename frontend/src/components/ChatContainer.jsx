@@ -1,8 +1,22 @@
+import { useEffect } from "react";
+import { useChatStore } from "../store/useChatStore";
+import ChatHeader from "./ChatHeader";
 
 const ChatContainer = () => {
-  return (
-    <div>ChatContainer</div>
-  )
-}
+  const { selectedUser, getMessages, messages, isMessagesLoading } =
+    useChatStore();
 
-export default ChatContainer
+  useEffect(() => {
+    if (selectedUser) {
+      getMessages(selectedUser._id);
+    }
+  }, [selectedUser]);
+
+  return (
+    <div className="p-3">
+      <ChatHeader />
+    </div>
+  );
+};
+
+export default ChatContainer;
