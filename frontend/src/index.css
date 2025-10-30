@@ -5,7 +5,8 @@
 
 @theme {
   --font-inter: "Inter", sans-serif;
-  --color-primary: #4169E1;
+  --color-primaryColor: #8b5cf6;
+  --color-purple-100: #211844;
   --color-light-100: #e2e8f0;
   --color-light-200: #cbd5e1;
   --color-light-300: #94a3b8;
@@ -25,7 +26,7 @@
   }
 
   .auth-btn {
-    @apply w-full bg-primary text-white rounded-lg py-2.5 font-medium hover:bg-primary/95 cursor-pointer my-3;
+    @apply w-full bg-primaryColor text-white rounded-lg py-2.5 font-medium hover:bg-primaryColor/95 cursor-pointer my-3;
   }
 }
 

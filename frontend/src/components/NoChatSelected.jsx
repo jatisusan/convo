@@ -3,8 +3,8 @@ import { MessageCircleIcon } from "lucide-react";
 const NoChatSelected = () => {
   return (
     <div className="flex flex-col items-center justify-center h-full text-center p-6">
-      <div className="size-20 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-        <MessageCircleIcon className="size-10 text-primary" />
+      <div className="size-20 bg-primaryColor/10 rounded-full flex items-center justify-center mb-6">
+        <MessageCircleIcon className="size-10 text-primaryColor" />
       </div>
       <h3 className="text-xl font-semibold text-light-100 mb-2">
         Select a conversation
