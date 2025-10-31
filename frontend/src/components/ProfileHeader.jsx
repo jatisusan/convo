@@ -4,7 +4,7 @@ import { useChatStore } from "../store/useChatStore";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-const mouseClickSound = new Audio("/sounds/c2.wav");
+const mouseClickSound = new Audio("/sounds/notification.mp3");
 
 const ProfileHeader = () => {
   const { authUser, logout, updateProfile } = useAuthStore();
@@ -86,11 +86,12 @@ const ProfileHeader = () => {
           <button
             className="text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
             onClick={() => {
-              // play click sound before toggling
-              mouseClickSound.currentTime = 0; // reset to start
-              mouseClickSound
-                .play()
-                .catch((error) => console.log("Audio play failed:", error));
+              if (!isSoundEnabled) {
+                mouseClickSound.currentTime = 0; // reset to start
+                mouseClickSound
+                  .play()
+                  .catch((error) => console.log("Audio play failed:", error));
+              }
               toggleSound();
             }}
           >

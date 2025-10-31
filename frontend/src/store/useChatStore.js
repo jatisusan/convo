@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { create } from "zustand";
 import { axiosInstance } from "../lib/axios";
+import { useAuthStore } from "./useAuthStore";
 
 export const useChatStore = create((set, get) => ({
   allContacts: [],
@@ -39,7 +40,7 @@ export const useChatStore = create((set, get) => ({
       const res = await axiosInstance.get("/messages/chats");
       set({ chats: res.data });
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
     } finally {
       set({ isUsersLoading: false });
     }
@@ -51,9 +52,39 @@ export const useChatStore = create((set, get) => ({
       const res = await axiosInstance.get(`/messages/${userId}`);
       set({ messages: res.data });
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
     } finally {
       set({ isMessagesLoading: false });
+    }
+  },
+
+  sendMessage: async (data) => {
+    const { selectedUser, messages } = get();
+    const { authUser } = useAuthStore.getState();
+
+    // optimistic update
+    const tempId = `temp-${Date.now()}`;
+    const optimisticMessage = {
+      _id: tempId,
+      senderId: authUser._id,
+      receiverId: selectedUser._id,
+      text: data.text,
+      image: data.image,
+      createdAt: new Date().toISOString(),
+    };
+
+    set({ messages: [...messages, optimisticMessage] });
+
+    try {
+      const res = await axiosInstance.post(
+        `/messages/send/${selectedUser._id}`,
+        data
+      );
+      set({ messages: messages.concat(res.data) });
+    } catch (error) {
+      // remove optimistic message on failure
+      set({ messages: messages });
+      toast.error(error.response?.data?.message || "Something went wrong!");
     }
   },
 }));

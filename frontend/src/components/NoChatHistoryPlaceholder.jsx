@@ -25,7 +25,7 @@ const NoChatHistoryPlaceholder = ({ name }) => {
         {quickMessages.map((msg, index) => (
           <button
             key={index}
-            className="px-4 py-2 text-xs font-medium text-light-200 bg-primary/10 rounded-full hover:bg-primary/15 transition-colors"
+            className="px-4 py-2 text-xs font-medium text-light-200 bg-primary/10 rounded-full cursor-text"
           >
             {msg}
           </button>
