@@ -13,7 +13,7 @@
 }
 
 @layer utilities {
-  .input {
+  .auth-input {
     @apply w-full bg-slate-800/50 rounded-lg py-3 pl-10 pr-4 text-light-100 text-[15px] placeholder-light-300 focus:outline-none;
   }
 

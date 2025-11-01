@@ -38,7 +38,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormValues({ ...formValues, fullName: e.target.value })
               }
-              className="input"
+              className="auth-input"
               placeholder="John Doe"
             />
           </div>
@@ -56,7 +56,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormValues({ ...formValues, email: e.target.value })
               }
-              className="input"
+              className="auth-input"
               placeholder="johndoe@gmail.com"
             />
           </div>
@@ -74,7 +74,7 @@ const SignupForm = () => {
               onChange={(e) =>
                 setFormValues({ ...formValues, password: e.target.value })
               }
-              className="input"
+              className="auth-input"
               placeholder="Enter your password"
             />
           </div>
@@ -92,7 +92,7 @@ const SignupForm = () => {
 
       <p className="text-md text-light-300 mt-4">
         Already have an account?{" "}
-        <a href="/auth/login" className="text-primary">
+        <a href="/auth/login" className="text-primaryColor">
           Sign in
         </a>
       </p>

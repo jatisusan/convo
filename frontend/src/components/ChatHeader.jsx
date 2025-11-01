@@ -1,12 +1,15 @@
+import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 import { XIcon } from "lucide-react";
 
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
+  const { onlineUsers } = useAuthStore();
+  const isOnline = onlineUsers.includes(selectedUser._id);
   return (
     <div className="flex justify-between items-center bg-[#181030] rounded-lg py-2 px-4">
       <div className="flex items-center gap-3">
-        <div className={`avatar avatar-online`}>
+        <div className={`avatar ${ isOnline && "avatar-online" }`}>
           <div className="w-10 rounded-full">
             <img src={selectedUser.profilePic || "/avatar.png"} alt="avatar" />
           </div>
@@ -16,7 +19,7 @@ const ChatHeader = () => {
           <h3 className="font-medium text-light-100">
             {selectedUser.fullName}
           </h3>
-          <p className="text-sm text-light-300">Online</p>
+          <p className="text-sm text-light-300">{isOnline ? "Online" : "Offline"}</p>
         </div>
       </div>
 

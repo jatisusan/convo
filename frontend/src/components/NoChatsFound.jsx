@@ -18,7 +18,7 @@ const NoChatsFound = () => {
       </div>
       <button
         onClick={() => setActiveTab("contacts")}
-        className="px-4 py-2 text-sm text-primary bg-primary/10  rounded-lg hover:bg-primary/15 transition-colors cursor-pointer"
+        className="px-4 py-2 text-sm text-primaryColor bg-primaryColor/10  rounded-lg hover:bg-primaryColor/15 transition-colors cursor-pointer"
       >
         Find contacts
       </button>

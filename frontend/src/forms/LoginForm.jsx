@@ -34,7 +34,7 @@ const LoginForm = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="input"
+              className="auth-input"
               placeholder="johndoe@gmail.com"
             />
           </div>
@@ -50,7 +50,7 @@ const LoginForm = () => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="input"
+              className="auth-input"
               placeholder="Enter your password"
             />
           </div>
@@ -68,7 +68,7 @@ const LoginForm = () => {
 
       <p className="text-md text-light-300 mt-4">
         Don't have an account?{" "}
-        <a href="/auth/signup" className="text-primary">
+        <a href="/auth/signup" className="text-primaryColor">
           Sign up
         </a>
       </p>
