@@ -35,12 +35,12 @@ const ProfileHeader = () => {
 
   return (
     <div className="border-b pb-3 border-slate-700/50">
-      <div className="flex items-center justify-between">
+      <div className="flex lg:flex-row flex-col max-lg:gap-2 items-center justify-between">
         <div className="flex items-center gap-3">
           {/* AVATAR */}
           <div className="avatar avatar-online">
             <button
-              className="size-14 rounded-full overflow-hidden relative group cursor-pointer"
+              className="md:size-14 size-10 rounded-full overflow-hidden relative group cursor-pointer"
               onClick={() => fileInputRef.current.click()}
             >
               <img
@@ -63,7 +63,7 @@ const ProfileHeader = () => {
           </div>
 
           {/* USERNAME & ONLINE TEXT */}
-          <div>
+          <div className="hidden md:block">
             <h3 className="text-slate-200 font-medium text-base max-w-[180px] truncate">
               {authUser.fullName}
             </h3>

@@ -6,16 +6,27 @@ import MessageInput from "./MessageInput";
 import MessagesLoadingSkeleton from "./MessagesLoadingSkeleton";
 
 const ChatContainer = () => {
-  const { selectedUser, getMessages, messages, isMessagesLoading } =
-    useChatStore();
+  const {
+    selectedUser,
+    getMessages,
+    messages,
+    isMessagesLoading,
+    subscribeToMessages,
+    unsubscribeToMessages,
+  } = useChatStore();
 
   const messageEndRef = useRef(null);
 
   useEffect(() => {
     if (selectedUser) {
       getMessages(selectedUser._id);
+      subscribeToMessages();
+
+      return () => {
+        unsubscribeToMessages();
+      };
     }
-  }, [selectedUser, getMessages]);
+  }, [selectedUser, getMessages, subscribeToMessages, unsubscribeToMessages]);
 
   useEffect(() => {
     if (messageEndRef.current) {
@@ -51,12 +62,12 @@ const ChatContainer = () => {
                       className="h-48 object-cover rounded-lg mb-2"
                     />
                   )}
-                  {msg.text && <p className="text-[15px]">{msg.text}</p>}
+                  {msg.text && <p className="text-[15px] max-sm:text-sm">{msg.text}</p>}
                 </div>
 
                 {/* Timestamp */}
                 <p
-                  className={`text-xs text-light-300 mt-1 ${
+                  className={`text-xs max-sm:text-[10px] text-light-300 mt-1 ${
                     msg.senderId === selectedUser._id
                       ? "self-start"
                       : "self-end"

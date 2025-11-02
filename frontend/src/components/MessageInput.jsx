@@ -47,7 +47,7 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="p-4 bg-[#181030] rounded-lg py-2 px-4">
+    <div className="bg-[#181030] rounded-lg py-2 px-4">
       {imagePreview && (
         <div className="max-w-3xl mx-auto mb-3 flex items-center">
           <div className="relative">
@@ -67,7 +67,7 @@ const MessageInput = () => {
         </div>
       )}
 
-      <form onSubmit={handleSendMessage} className="flex">
+      <form onSubmit={handleSendMessage} className="flex flex-wrap items-center gap-2">
         <input
           type="text"
           value={text}
@@ -76,7 +76,7 @@ const MessageInput = () => {
             if (isSoundEnabled) playRandomKeyStroke();
           }}
           placeholder="Type a message..."
-          className="flex-1 text-light-100 text-[15px] placeholder-light-300 focus:outline-none"
+          className="flex-1 text-light-100 min-w-[150px] text-[15px] placeholder-light-300 focus:outline-none"
         />
         <input
           type="file"
@@ -86,21 +86,21 @@ const MessageInput = () => {
           className="hidden"
         />
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 shrink-0">
           <button
             type="button"
             onClick={() => fileInputRef.current.click()}
-            className="bg-[#261B4C] p-2 rounded-md w-fit cursor-pointer hover:bg-[#261B4C]/60"
+            className="bg-[#261B4C] p-2 max-sm:p-1.5 rounded-md w-fit cursor-pointer hover:bg-[#261B4C]/60"
           >
-            <ImageIcon className="size-5" />
+            <ImageIcon className="size-5 max-sm:size-4.5" />
           </button>
 
           <button
             type="submit"
             disabled={!text.trim() && !imagePreview}
-            className="bg-primaryColor/80 p-2 rounded-md w-fit cursor-pointer enabled:hover:bg-primaryColor/60 disabled:opacity-50 disabled:cursor-not-allowed "
+            className="bg-primaryColor/80 p-2 max-sm:p-1.5 rounded-md w-fit cursor-pointer enabled:hover:bg-primaryColor/60 disabled:opacity-50 disabled:cursor-not-allowed "
           >
-            <Send className="size-5" />
+            <Send className="size-5 max-sm:size-4.5" />
           </button>
         </div>
       </form>

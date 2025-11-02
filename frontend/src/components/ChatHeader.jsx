@@ -16,10 +16,10 @@ const ChatHeader = () => {
         </div>
 
         <div>
-          <h3 className="font-medium text-light-100">
+          <h3 className="font-medium text-light-100 max-sm:text-sm">
             {selectedUser.fullName}
           </h3>
-          <p className="text-sm text-light-300">{isOnline ? "Online" : "Offline"}</p>
+          <p className="text-sm max-sm:text-xs text-light-300">{isOnline ? "Online" : "Offline"}</p>
         </div>
       </div>
 
